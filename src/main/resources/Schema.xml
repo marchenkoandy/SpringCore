@@ -12,12 +12,10 @@
     <bean id="app" class="spring.core.App">
         <constructor-arg ref="client"/>
         <constructor-arg ref="eventLogger"/>
-        <property name="event" value="event"/>
     </bean>
-    <bean id="event" class="spring.core.beans.Event"/>
-    <!--<constructor-arg>-->
-    <!--<bean id="date" class="java.util.Date"/>-->
-    <!--</constructor-arg>-->
-
-    <!--</bean>-->
+    <bean id="event" class="spring.core.beans.Event" scope="prototype">
+        <constructor-arg>
+            <bean id="date" class="java.util.Date"/>
+        </constructor-arg>
+    </bean>
 </beans>

@@ -9,12 +9,10 @@ import spring.core.loggers.EventLogger;
 
 public class App {
 
-
-    private Event event;
     private Client client;
     private EventLogger eventLogger;
 
-    public void logEvent(String msg) {
+    public void logEvent(Event event,String msg) {
         String message = msg.replaceAll(client.getId(), client.getFullName());
         event.setMsg(message);
         eventLogger.logEvent(event);
@@ -28,11 +26,9 @@ public class App {
     public static void main(String[] args) {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("Schema.xml");
         App app = ctx.getBean(App.class);
-//        app.client = new Client("1","John Smith");
-//        app.eventLogger = new ConsoleEventLogger();
-////
-        app.logEvent("Some event for user 1");
-        app.logEvent("Some event for user 2");
+        for(int i=0; i<10;i++) {
+            Event event = ctx.getBean(Event.class);
+            app.logEvent(event, "Some event for user 1");
+        }
     }
-
 }

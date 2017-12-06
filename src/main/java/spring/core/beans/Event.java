@@ -9,9 +9,9 @@ public class Event {
     private Date date;
 
     public Event(){}
-//    public Event(Date date){
-//        this.date = date;
-//    }
+    public Event(Date date){
+        this.date = date;
+    }
 
     public String getMsg() {
         return msg;
