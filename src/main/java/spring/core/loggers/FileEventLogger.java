@@ -1,0 +1,57 @@
+package spring.core.loggers;
+
+import org.apache.commons.io.FileUtils;
+import spring.core.App;
+import spring.core.beans.Event;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
+
+public class FileEventLogger implements EventLogger,Observer {
+    private String fileName;
+    private File file;
+    private App eventReporter;
+
+    public FileEventLogger(String fileName){
+        this.fileName = fileName;
+        this.file = new File(this.fileName);
+    }
+
+    private void init() throws IOException{
+//        if (!this.file.canWrite()){
+//            throw new IOException("File cannot be written.");
+//        }
+    }
+
+    private void writeEventToFile(Event event){
+        List<Event> eventList = new ArrayList<Event>();
+        eventList.add(event);
+        writeEventsToFile(eventList);
+    }
+
+    protected void writeEventsToFile(List<Event> eventList) {
+        StringBuilder eventsToString = new StringBuilder();
+        for (Event event: eventList){
+            eventsToString.append(event.toString());
+            eventsToString.append("\n");
+        }
+        try {
+            FileUtils.writeStringToFile(file, eventsToString.toString(),true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void logEvent(Event event) {
+       writeEventToFile(event);
+    }
+
+    public void update(Observable eventEmitter, Object arg) {
+        eventReporter = (App) eventEmitter;
+        logEvent(eventReporter.getEvent());
+    }
+}
