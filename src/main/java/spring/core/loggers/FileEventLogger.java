@@ -1,6 +1,7 @@
 package spring.core.loggers;
 
 import org.apache.commons.io.FileUtils;
+import org.springframework.stereotype.Component;
 import spring.core.App;
 import spring.core.beans.Event;
 
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+@Component("fileEventLogger")
 public class FileEventLogger implements EventLogger {
     private String fileName;
     private File file;

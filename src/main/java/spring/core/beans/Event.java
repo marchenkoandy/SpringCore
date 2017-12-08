@@ -1,8 +1,13 @@
 package spring.core.beans;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import java.util.Date;
 import java.util.Random;
 
+@Component("event")
+@Scope("prototype")
 public class Event {
     private int id = new Random().nextInt();
     private String msg;

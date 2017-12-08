@@ -1,11 +1,13 @@
 package spring.core.loggers;
 
+import org.springframework.stereotype.Component;
 import spring.core.beans.Event;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+@Component("cacheFileLogger")
 public class CacheFileLogger extends FileEventLogger {
 
     private int cacheSize;

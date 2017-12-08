@@ -1,30 +1,43 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:utils="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-	http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util-2.5.xsd">
+
+    <import resource="loggers.xml"/>
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:client.properties</value>
+            </list>
+        </property>
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="systemPropertiesMode" value="override"/>
+    </bean>
 
     <bean id="client" class="spring.core.beans.Client">
-        <constructor-arg value="1"/>
-        <constructor-arg value="John Smith"/>
+        <constructor-arg>${id}</constructor-arg>
+        <constructor-arg>${name}</constructor-arg>
+        <property name="greeting" value="${greeting}"/>
     </bean>
-    <bean id="eventLogger" class="spring.core.loggers.ConsoleEventLogger"/>
 
     <bean id="app" class="spring.core.App">
         <constructor-arg ref="client"/>
-        <constructor-arg ref="eventLogger"/>
-        <constructor-arg ref="fileEventLogger"/>
-        <constructor-arg ref="cacheFileEventLogger"/>
+
+
+        <constructor-arg>
+            <list value-type="spring.core.loggers.EventLogger">
+                <ref local="eventLogger"/>
+                <ref local="fileEventLogger"/>
+                <ref local="cacheFileEventLogger"/>
+            </list>
+        </constructor-arg>
     </bean>
     <bean id="event" class="spring.core.beans.Event" scope="prototype">
         <constructor-arg>
             <bean id="date" class="java.util.Date"/>
         </constructor-arg>
-    </bean>
-    <bean id="fileEventLogger" class="spring.core.loggers.FileEventLogger">
-        <constructor-arg value="target/springtest/log.txt"/>
-    </bean>
-    <bean id="cacheFileEventLogger" class="spring.core.loggers.CacheFileLogger" destroy-method="destroy">
-        <constructor-arg value="target/springtest/cache_log.txt"/>
-        <constructor-arg value="5"/>
     </bean>
 </beans>
