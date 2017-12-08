@@ -16,6 +16,12 @@ public class CacheFileLogger extends FileEventLogger {
         this.cacheSize = cacheSize;
     }
 
+    private void destroy(){
+        if (!cache.isEmpty()){
+            writeEventsToFile(cache);
+        }
+    }
+
     @Override
     public void logEvent(Event event) {
         cache.add(event);

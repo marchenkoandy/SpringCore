@@ -23,7 +23,7 @@
     <bean id="fileEventLogger" class="spring.core.loggers.FileEventLogger">
         <constructor-arg value="target/springtest/log.txt"/>
     </bean>
-    <bean id="cacheFileEventLogger" class="spring.core.loggers.CacheFileLogger">
+    <bean id="cacheFileEventLogger" class="spring.core.loggers.CacheFileLogger" destroy-method="destroy">
         <constructor-arg value="target/springtest/cache_log.txt"/>
         <constructor-arg value="5"/>
     </bean>

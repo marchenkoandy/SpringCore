@@ -2,6 +2,7 @@ package spring.core;
 
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import spring.core.beans.Client;
 import spring.core.beans.Event;
@@ -15,7 +16,7 @@ public class App extends Observable {
     private EventLogger eventLogger;
     private EventLogger fileEventLogger;
     private EventLogger cacheFileEventLogger;
-    private static ApplicationContext ctx;
+    private static ConfigurableApplicationContext ctx;
 
     public void logEvent(String msg) {
         String message = msg.replaceAll(client.getId(), client.getFullName());
@@ -38,8 +39,9 @@ public class App extends Observable {
         ctx = new ClassPathXmlApplicationContext("Schema.xml");
         App app = ctx.getBean(App.class);
 
-        for(int i=0; i<10;i++) {
+        for(int i=0; i<9;i++) {
             app.logEvent("Some event for user 1");
         }
+        ctx.close();
     }
 }
