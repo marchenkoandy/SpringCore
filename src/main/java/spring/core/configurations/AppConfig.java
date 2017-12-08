@@ -20,7 +20,7 @@ public class AppConfig {
 
     @Bean
     public App app() {
-        return new App(client, loggerConfig.loggersMap);
+        return new App(client, loggerConfig.loggersMap());
     }
 
 }

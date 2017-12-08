@@ -6,14 +6,14 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 import java.util.Random;
 
-@Component("event")
+@Component
 @Scope("prototype")
 public class Event {
     private int id = new Random().nextInt();
     private String msg;
     private Date date;
 
-    public Event(){}
+//    public Event(){}
     public Event(Date date){
         this.date = date;
     }

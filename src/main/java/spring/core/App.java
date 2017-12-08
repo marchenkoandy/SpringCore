@@ -1,15 +1,19 @@
 package spring.core;
 
 
+import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import spring.core.beans.Client;
 import spring.core.beans.Event;
+import spring.core.configurations.AppConfig;
 import spring.core.enums.EventType;
 import spring.core.loggers.EventLogger;
 
+import java.lang.annotation.Annotation;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
@@ -19,19 +23,16 @@ public class App extends Observable {
     @Autowired
     private Client client;
 
-    private Map<EventType, EventLogger> eventLoggers;
-
     @Autowired
-    private static ConfigurableApplicationContext ctx;
+    private ObjectFactory<Event> eventsFactory;
 
+    private Map<EventType, EventLogger> eventLoggers;
 
     public void logEvent(String msg, EventType eventType) {
         String message = msg.replaceAll(client.getId(), client.getFullName());
-        Event event = ctx.getBean(Event.class);
+        Event event = eventsFactory.getObject();
         event.setMsg(message);
-        for (Map.Entry<EventType, EventLogger> eventLogger : eventLoggers.entrySet()) {
-//            eventLogger.logEvent(event);
-        }
+        eventLoggers.get(eventType).logEvent(event);
     }
 
     public App(Client client, Map<EventType, EventLogger> eventLoggers) {
@@ -39,16 +40,19 @@ public class App extends Observable {
         this.eventLoggers = eventLoggers;
     }
 
+    public void main(){
+        for(int i=0; i<10;i++) {
+            this.logEvent("Some event for user 1",EventType.ALL);
+//            this.logEvent("Some event for user 2",EventType.ALL);
+        }
+    }
+
 
     public static void main(String[] args) {
         System.out.println("TEST");
-
-//        ctx = new ClassPathXmlApplicationContext("Schema.xml");
-//        App app = ctx.getBean(App.class);
-//
-//        for(int i=0; i<9;i++) {
-//            app.logEvent("Some event for user 1",EventType.INFO);
-//        }
-//        ctx.close();
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        App app = context.getBean(App.class);
+        app.main();
+        System.out.println("THE END");
     }
 }
