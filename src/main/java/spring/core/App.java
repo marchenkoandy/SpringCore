@@ -5,13 +5,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import spring.core.beans.Client;
 import spring.core.beans.Event;
-import spring.core.loggers.CacheFileLogger;
 import spring.core.loggers.EventLogger;
-import spring.core.loggers.FileEventLogger;
 
-import java.util.Map;
 import java.util.Observable;
-import java.util.Observer;
 
 public class App extends Observable {
 
@@ -20,7 +16,7 @@ public class App extends Observable {
     private EventLogger fileEventLogger;
     private static ApplicationContext ctx;
 
-    public void setEvent(String msg) {
+    public void logEvent(String msg) {
         String message = msg.replaceAll(client.getId(), client.getFullName());
         Event event = ctx.getBean(Event.class);
         event.setMsg(message);
@@ -40,7 +36,7 @@ public class App extends Observable {
         App app = ctx.getBean(App.class);
 
         for(int i=0; i<10;i++) {
-            app.setEvent("Some event for user 1");
+            app.logEvent("Some event for user 1");
         }
     }
 }

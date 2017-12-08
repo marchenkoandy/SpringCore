@@ -12,6 +12,7 @@
     <bean id="app" class="spring.core.App">
         <constructor-arg ref="client"/>
         <constructor-arg ref="eventLogger"/>
+        <constructor-arg ref="fileEventLogger"/>
     </bean>
     <bean id="event" class="spring.core.beans.Event" scope="prototype">
         <constructor-arg>
