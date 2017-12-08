@@ -18,4 +18,7 @@
             <bean id="date" class="java.util.Date"/>
         </constructor-arg>
     </bean>
+    <bean id="fileEventLogger" class="spring.core.loggers.FileEventLogger">
+        <constructor-arg value="target/springtest/log.txt"/>
+    </bean>
 </beans>

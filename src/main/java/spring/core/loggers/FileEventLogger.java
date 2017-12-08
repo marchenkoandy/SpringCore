@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-public class FileEventLogger implements EventLogger,Observer {
+public class FileEventLogger implements EventLogger {
     private String fileName;
     private File file;
     private App eventReporter;
@@ -50,8 +50,4 @@ public class FileEventLogger implements EventLogger,Observer {
        writeEventToFile(event);
     }
 
-    public void update(Observable eventEmitter, Object arg) {
-        eventReporter = (App) eventEmitter;
-        logEvent(eventReporter.getEvent());
-    }
 }

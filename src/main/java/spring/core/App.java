@@ -16,48 +16,31 @@ import java.util.Observer;
 public class App extends Observable {
 
     private Client client;
-//    private EventLogger eventLogger;
-//    private EventLogger fileEventLogger;
-    private Event event;
-    private ApplicationContext ctx;
+    private EventLogger eventLogger;
+    private EventLogger fileEventLogger;
+    private static ApplicationContext ctx;
 
     public void setEvent(String msg) {
         String message = msg.replaceAll(client.getId(), client.getFullName());
-        event = ctx.getBean(Event.class);
+        Event event = ctx.getBean(Event.class);
         event.setMsg(message);
-        setChanged();
-        notifyObservers();
-//        eventLogger.logEvent(event);
-//        fileEventLogger.logEvent(event);
+        eventLogger.logEvent(event);
+        fileEventLogger.logEvent(event);
     }
 
-    public Event getEvent() {
-        return event;
-    }
-
-    public App(){}
-
-    public App(Client client) {
+    public App(Client client, EventLogger eventLogger, EventLogger fileEventLogger) {
         this.client = client;
-//        this.eventLogger = eventLogger;
-//        this.fileEventLogger = fileEventLogger;
+        this.eventLogger = eventLogger;
+        this.fileEventLogger = fileEventLogger;
     }
 
-    public void main(){
+
+    public static void main(String[] args) {
         ctx = new ClassPathXmlApplicationContext("Schema.xml");
         App app = ctx.getBean(App.class);
-        EventLogger eventLogger = ctx.getBean(FileEventLogger.class);
-//        EventLogger fileEventLogger = ctx.getBean(CacheFileLogger.class);
-        app.addObserver((Observer) eventLogger);
-//        app.addObserver((Observer) fileEventLogger);
 
         for(int i=0; i<10;i++) {
             app.setEvent("Some event for user 1");
         }
-    }
-
-    public static void main(String[] args) {
-        App app = new App();
-        app.main();
     }
 }
