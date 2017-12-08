@@ -14,6 +14,7 @@ public class App extends Observable {
     private Client client;
     private EventLogger eventLogger;
     private EventLogger fileEventLogger;
+    private EventLogger cacheFileEventLogger;
     private static ApplicationContext ctx;
 
     public void logEvent(String msg) {
@@ -22,12 +23,14 @@ public class App extends Observable {
         event.setMsg(message);
         eventLogger.logEvent(event);
         fileEventLogger.logEvent(event);
+        cacheFileEventLogger.logEvent(event);
     }
 
-    public App(Client client, EventLogger eventLogger, EventLogger fileEventLogger) {
+    public App(Client client, EventLogger eventLogger, EventLogger fileEventLogger, EventLogger cacheFileEventLogger) {
         this.client = client;
         this.eventLogger = eventLogger;
         this.fileEventLogger = fileEventLogger;
+        this.cacheFileEventLogger= cacheFileEventLogger;
     }
 
 
