@@ -8,7 +8,6 @@ import spring.core.loggers.*;
 
 import java.util.*;
 
-//@Configuration
 public class LoggerConfig {
 
     public Map<EventType, EventLogger> loggersMap() {

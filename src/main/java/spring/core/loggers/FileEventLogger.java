@@ -12,21 +12,13 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-@Component("fileEventLogger")
 public class FileEventLogger implements EventLogger {
     private String fileName;
     private File file;
-    private App eventReporter;
 
     public FileEventLogger(String fileName){
         this.fileName = fileName;
         this.file = new File(this.fileName);
-    }
-
-    private void init() throws IOException{
-//        if (!this.file.canWrite()){
-//            throw new IOException("File cannot be written.");
-//        }
     }
 
     private void writeEventToFile(Event event){
@@ -51,5 +43,4 @@ public class FileEventLogger implements EventLogger {
     public void logEvent(Event event) {
        writeEventToFile(event);
     }
-
 }

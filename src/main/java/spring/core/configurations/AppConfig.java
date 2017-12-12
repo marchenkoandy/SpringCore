@@ -8,7 +8,6 @@ import spring.core.beans.Client;
 
 import javax.annotation.Resource;
 
-//@Configuration
 @Import({LoggerConfig.class, OtherConfig.class})
 public class AppConfig {
 
