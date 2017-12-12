@@ -12,10 +12,10 @@ import java.util.Date;
 
 public class OtherConfig {
 
-    @Value("1")
+    @Value("${client.id}")
     private String id;
 
-    @Value("John Smith")
+    @Value("${client.name}")
     private String fullName;
 
     @Bean

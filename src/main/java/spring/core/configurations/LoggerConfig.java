@@ -3,11 +3,14 @@ package spring.core.configurations;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import spring.core.enums.EventType;
 import spring.core.loggers.*;
 
 import java.util.*;
 
+@Configuration
 public class LoggerConfig {
 
     public Map<EventType, EventLogger> loggersMap() {
@@ -19,6 +22,7 @@ public class LoggerConfig {
         }};
         return loggersMap;
     }
+
     private Set loggersSet() {
         Set loggersSet = new HashSet() {{
             add(consoleEventLogger());
@@ -28,13 +32,13 @@ public class LoggerConfig {
         return loggersSet;
     }
 
-    @Value("target/springtest/log.txt")
+    @Value("${log.file.simple}")
     private String logFile;
 
-    @Value("target/springtest/cache_log.txt")
+    @Value("${log.file.cache}")
     private String cacheLogFile;
 
-    @Value("5")
+    @Value("${cache.size}")
     private int cacheSize;
 
     @Bean
