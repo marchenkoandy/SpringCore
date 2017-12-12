@@ -1,8 +1,5 @@
 package spring.core.beans;
 
-import org.springframework.stereotype.Component;
-
-@Component("client")
 public class Client {
     private String id;
     private String fullName;

@@ -5,7 +5,7 @@ import spring.core.beans.Event;
 
 import java.util.Collection;
 
-@Component("combinedEventLogger")
+//@Component("combinedEventLogger")
 public class CombinedEventLogger implements EventLogger{
     private Collection<EventLogger> loggers;
 

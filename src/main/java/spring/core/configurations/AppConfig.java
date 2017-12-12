@@ -8,7 +8,7 @@ import spring.core.beans.Client;
 
 import javax.annotation.Resource;
 
-@Configuration
+//@Configuration
 @Import({LoggerConfig.class, OtherConfig.class})
 public class AppConfig {
 

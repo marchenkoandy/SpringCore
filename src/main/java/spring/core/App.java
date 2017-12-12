@@ -4,23 +4,17 @@ package spring.core;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import spring.core.beans.Client;
 import spring.core.beans.Event;
 import spring.core.configurations.AppConfig;
 import spring.core.enums.EventType;
 import spring.core.loggers.EventLogger;
-
-import java.lang.annotation.Annotation;
-import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 
 public class App extends Observable {
 
-    @Autowired
     private Client client;
 
     @Autowired
@@ -43,7 +37,6 @@ public class App extends Observable {
     public void main(){
         for(int i=0; i<10;i++) {
             this.logEvent("Some event for user 1",EventType.ALL);
-//            this.logEvent("Some event for user 2",EventType.ALL);
         }
     }
 

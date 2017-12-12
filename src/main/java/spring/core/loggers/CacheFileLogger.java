@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-@Component("cacheFileLogger")
+//@Component("cacheFileLogger")
 public class CacheFileLogger extends FileEventLogger {
 
     private int cacheSize;

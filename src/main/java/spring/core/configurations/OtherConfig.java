@@ -9,7 +9,7 @@ import spring.core.beans.Event;
 
 import java.util.Date;
 
-@Configuration
+//@Configuration
 public class OtherConfig {
 
     @Value("1")
