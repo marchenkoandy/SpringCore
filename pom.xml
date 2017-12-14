@@ -9,6 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <properties>
         <spring.version>4.3.4.RELEASE</spring.version>
+        <aspectj.version>RELEASE</aspectj.version>
     </properties>
     <dependencies>
         <dependency>
@@ -35,6 +36,11 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
         </dependency>
     </dependencies>
 

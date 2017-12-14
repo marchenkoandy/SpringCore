@@ -5,6 +5,7 @@ import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.stereotype.Component;
 import spring.core.beans.Client;
 import spring.core.beans.Event;
 import spring.core.configurations.AppConfig;
@@ -13,6 +14,7 @@ import spring.core.loggers.EventLogger;
 import java.util.Map;
 import java.util.Observable;
 
+@Component
 public class App extends Observable {
 
     private Client client;

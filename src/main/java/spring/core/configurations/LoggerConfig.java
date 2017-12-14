@@ -11,26 +11,6 @@ import java.util.*;
 @Configuration
 public class LoggerConfig {
 
-    public Map<EventType, EventLogger> loggersMap() {
-        final Map<EventType, EventLogger> loggersMap = new HashMap<EventType, EventLogger>() {{
-            put(EventType.INFO, consoleEventLogger());
-            put(EventType.ERROR, fileEventLogger());
-            put(EventType.DEFAULT, cacheFileLogger());
-            put(EventType.ALL, combinedEventLogger());
-        }};
-        return loggersMap;
-    }
-
-    private Set loggersSet() {
-        Set loggersSet = new HashSet() {{
-            add(consoleEventLogger());
-            add(fileEventLogger());
-            add(cacheFileLogger());
-        }};
-        return loggersSet;
-    }
-
-//
     @Value("${log.file.simple}")
     private String logFile;
 
@@ -58,5 +38,24 @@ public class LoggerConfig {
     @Bean
     public EventLogger combinedEventLogger() {
         return new CombinedEventLogger(loggersSet());
+    }
+
+    public Map<EventType, EventLogger> loggersMap() {
+        final Map<EventType, EventLogger> loggersMap = new HashMap<EventType, EventLogger>() {{
+            put(EventType.INFO, consoleEventLogger());
+            put(EventType.ERROR, fileEventLogger());
+            put(EventType.DEFAULT, cacheFileLogger());
+            put(EventType.ALL, combinedEventLogger());
+        }};
+        return loggersMap;
+    }
+
+    private Set loggersSet() {
+        Set loggersSet = new HashSet() {{
+            add(consoleEventLogger());
+            add(fileEventLogger());
+            add(cacheFileLogger());
+        }};
+        return loggersSet;
     }
 }

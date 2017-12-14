@@ -1,14 +1,12 @@
 package spring.core.configurations;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import spring.core.App;
 import spring.core.beans.Client;
 import javax.annotation.Resource;
 
 @Configuration
+@EnableAspectJAutoProxy
 @Import({LoggerConfig.class, OtherConfig.class})
 @PropertySource({"classpath:/loggers.properties", "classpath:/client.properties"})
 public class AppConfig {
