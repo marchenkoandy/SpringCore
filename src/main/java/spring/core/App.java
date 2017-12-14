@@ -40,7 +40,6 @@ public class App extends Observable {
         }
     }
 
-
     public static void main(String[] args) {
         System.out.println("TEST");
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);

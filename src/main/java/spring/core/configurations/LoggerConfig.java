@@ -3,8 +3,6 @@ package spring.core.configurations;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import spring.core.enums.EventType;
 import spring.core.loggers.*;
 
@@ -32,6 +30,7 @@ public class LoggerConfig {
         return loggersSet;
     }
 
+//
     @Value("${log.file.simple}")
     private String logFile;
 
